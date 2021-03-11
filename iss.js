@@ -12,8 +12,8 @@ const fetchMyIp = (callback) => {
   //request to ipify api
   request('https://api.ipify.org?format=json', (error, response, body) => {
     //if error, pass it into callback
-    if (error) return callback(error);
-    if (response.statusCode !== 200) return callback('There was a problem with your request, status code not 200');
+    if (error) return callback(error, null); //null represents the ip arg being unsuccessful
+    if (response.statusCode !== 200) return callback('There was a problem with your request, status code not 200', null);
     //turn JSON into object
     const ipReturn = JSON.parse(body);
     //successful, pass ipReturn.ip into callback in the ip arg spot
