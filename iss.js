@@ -15,9 +15,9 @@ const fetchMyIp = (callback) => {
     if (error) return callback(error, null); //null represents the ip arg being unsuccessful
     if (response.statusCode !== 200) return callback(Error(`There was a problem with your request, status code: ${response.statusCode}`), null);
     //turn JSON into object
-    const ipReturn = JSON.parse(body);
+    const ipReturn = JSON.parse(body).ip;
     //successful, pass ipReturn.ip into callback in the ip arg spot
-    return callback(error, ipReturn.ip);
+    return callback(error, ipReturn);
   });
 };
 
