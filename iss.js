@@ -9,7 +9,7 @@ const request = require("request");
 
 // *   - The IP address as a string (null if error). Example: "162.245.144.188"
 const fetchMyIp = (callback) => {
-
+  //request to ipify api
   request('https://api.ipify.org?format=json', (error, response, body) => {
     //if error, pass it into callback
     if (error) return callback(error);
