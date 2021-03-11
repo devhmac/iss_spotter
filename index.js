@@ -1,5 +1,5 @@
 const { fetchMyIp } = require('./iss');
-const { fetchCoordsByIP } = require('./iss')
+const { fetchCoordsByIP } = require('./iss');
 
 fetchMyIp((error, ip) => {
   if (error) {

@@ -31,11 +31,11 @@ const fetchCoordsByIP = (ip, callback) => {
       callback(Error(`There was a problem with your request, status code: ${response.statusCode}`), null);
       return;
     }
-    const dataReturn = JSON.parse(body)
+    const dataReturn = JSON.parse(body);
 
-    const { latitude, longitude } = dataReturn
+    const { latitude, longitude } = dataReturn;
 
-    callback(null, { latitude, longitude })
+    callback(null, { latitude, longitude });
   });
 };
 
