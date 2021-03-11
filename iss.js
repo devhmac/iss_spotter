@@ -13,13 +13,38 @@ const fetchMyIp = (callback) => {
   request('https://api.ipify.org/?format=json', (error, response, body) => {
     //if error, pass it into callback
     if (error) return callback(error, null); //null represents the ip arg being unsuccessful
-    if (response.statusCode !== 200) return callback(Error(`There was a problem with your request, status code: ${response.statusCode}`), null);
+    if (response.statusCode !== 200) {
+      callback(Error(`There was a problem with your request, status code: ${response.statusCode}`), null);
+      return;
+    }
     //turn JSON into object
     const ipReturn = JSON.parse(body).ip;
     //successful, pass ipReturn.ip into callback in the ip arg spot
-    return callback(error, ipReturn);
+    callback(null, ipReturn);
   });
 };
 
+const fetchCoordsByIP = (ip, callback) => {
+  request('https://freegeoip.app/json/', (error, response, body) => {
+    if (error) return callback(error, null);
+    if (response.statusCode !== 200) {
+      callback(Error(`There was a problem with your request, status code: ${response.statusCode}`), null);
+      return;
+    }
+    const dataReturn = JSON.parse(body)
+
+    const longLat = {
+      latitude: dataReturn.latitude,
+      longitude: dataReturn.longitude,
+    }
+
+    callback(null, longLat)
+  });
+};
+
+
 //fetchMyIp()
-module.exports = { fetchMyIp };
+module.exports = {
+  fetchMyIp,
+  fetchCoordsByIP
+};
