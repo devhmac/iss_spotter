@@ -7,7 +7,10 @@ nextISSTimesForMyLocation((error, passTimes) => {
   if (error) {
     return console.log('It didnt work: ', error);
   }
-  console.log(passTimes)
+  const flyOverArray = passTimes
+  for (let pass of flyOverArray) {
+    console.log(pass)
+  }
 })
 
 // fetchMyIp((error, ip) => {
