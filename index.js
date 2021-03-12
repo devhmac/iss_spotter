@@ -9,11 +9,11 @@ const convertPassTimes = (passTime) => {
 };
 
 
-// nextISSTimesForMyLocation((error, passTimes) => {
-//   if (error) {
-//     return console.log('It didnt work: ', error);
-//   }
-//   convertPassTimes(passTimes);
-// });
+nextISSTimesForMyLocation((error, passTimes) => {
+  if (error) {
+    return console.log('It didnt work: ', error);
+  }
+  convertPassTimes(passTimes);
+});
 
 module.exports = { convertPassTimes };
