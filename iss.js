@@ -25,7 +25,7 @@ const fetchMyIp = (callback) => {
 };
 
 const fetchCoordsByIP = (ip, callback) => {
-  request('https://freegeoip.app/json/', (error, response, body) => {
+  request(`https://freegeoip.app/json/${ip}`, (error, response, body) => {
     if (error) return callback(error, null);
     if (response.statusCode !== 200) {
       callback(Error(`There was a problem with your request, status code: ${response.statusCode}`), null);
@@ -51,13 +51,18 @@ const fetchISSFlyOverTimes = (coords, callback) => {
     callback(null, flyOverReturn.response);
   });
 
-
 };
+
+const nextISSTimesForMyLocation = (callback) => {
+
+
+}
 
 
 
 module.exports = {
   fetchMyIp,
   fetchCoordsByIP,
-  fetchISSFlyOverTimes
+  fetchISSFlyOverTimes,
+  nextISSTimesForMyLocation
 };
