@@ -25,5 +25,5 @@ fetchISSFlyOverTimes({ latitude: 53.5185, longitude: -113.6579 }, (error, data) 
     console.log('There was an Error: ', error);
     return;
   }
-  console.log('It worked here are the coordinates: ', data);
+  console.log('It worked here are the flyOvers: ', data);
 })
