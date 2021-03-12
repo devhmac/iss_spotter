@@ -66,16 +66,11 @@ const nextISSTimesForMyLocation = (callback) => {
         if (error) return callback(error);
 
         callback(null, passTimes);
-      })
+      });
     });
   });
 };
 
 
 
-module.exports = {
-  fetchMyIp,
-  fetchCoordsByIP,
-  fetchISSFlyOverTimes,
-  nextISSTimesForMyLocation
-};
+module.exports = { nextISSTimesForMyLocation };
