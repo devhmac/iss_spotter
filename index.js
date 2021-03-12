@@ -16,3 +16,4 @@ nextISSTimesForMyLocation((error, passTimes) => {
   convertPassTimes(passTimes);
 });
 
+module.exports = { convertPassTimes };

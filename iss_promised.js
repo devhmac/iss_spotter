@@ -1,4 +1,5 @@
 const request = require('request-promise-native');
+
 //request-promise-native automatically returns a promise
 
 const fetchMyIP = () => {
@@ -12,6 +13,16 @@ const fetchISSFlyOverTimes = (data) => { //takes in coordinate json data
   const coords = JSON.parse(data);
   return request(`http://api.open-notify.org/iss-pass.json?lat=${coords.latitude}&lon=${coords.longitude}`);
 }
+// we have made a function that can execute the promise chain here, which we'll export to index, and call there. 
+const nextISSTimesForMyLocation = () => {
+  return fetchMyIP()
+    //.then((ip) => { console.log(ip); })
+    .then(fetchCoordsByIP)
+    .then(fetchISSFlyOverTimes)
+    .then((data) => {
+      const { response } = JSON.parse(data) // this is pulling the .response section  (which has the array of flyover times) from the json string
+      return response;
+    })
+};
 
-
-module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes };
+module.exports = { nextISSTimesForMyLocation };
