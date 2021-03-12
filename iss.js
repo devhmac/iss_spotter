@@ -42,17 +42,17 @@ const fetchCoordsByIP = (ip, callback) => {
 const fetchISSFlyOverTimes = (coords, callback) => {
   request(`http://api.open-notify.org/iss-pass.json?lat=${coords.latitude}&lon=${coords.longitude}`, (error, response, body) => {
     if (error) return callback(error, null);
-    const flyOverReturn = JSON.parse(body)
+    const flyOverReturn = JSON.parse(body);
     if (response.statusCode !== 200) {
       callback(Error(`There was a problem with your request, status code: ${response.statusCode}, ${flyOverReturn.reason}`), null);
       return;
     }
 
-    callback(null, flyOverReturn.response)
-  })
+    callback(null, flyOverReturn.response);
+  });
 
 
-}
+};
 
 
 
