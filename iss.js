@@ -14,7 +14,7 @@ const fetchMyIp = (callback) => {
     //if error, pass it into callback
     if (error) return callback(error, null); //null represents the ip arg being unsuccessful
     if (response.statusCode !== 200) {
-      callback(Error(`There was a problem with your request, status code: ${response.statusCode}`), null);
+      callback(Error(`There was a problem finding your IP, status code: ${response.statusCode}`), null);
       return;
     }
     //turn JSON into object
@@ -28,7 +28,7 @@ const fetchCoordsByIP = (ip, callback) => {
   request(`https://freegeoip.app/json/${ip}`, (error, response, body) => {
     if (error) return callback(error, null);
     if (response.statusCode !== 200) {
-      callback(Error(`There was a problem with your request, status code: ${response.statusCode}`), null);
+      callback(Error(`There was a problem fetching your coordinates, status code: ${response.statusCode}`), null);
       return;
     }
     const latLongReturn = JSON.parse(body);
@@ -44,7 +44,7 @@ const fetchISSFlyOverTimes = (coords, callback) => {
     if (error) return callback(error, null);
     const flyOverReturn = JSON.parse(body);
     if (response.statusCode !== 200) {
-      callback(Error(`There was a problem with your request, status code: ${response.statusCode}, ${flyOverReturn.reason}`), null);
+      callback(Error(`There was a problem finding your flyover times, status code: ${response.statusCode}, ${flyOverReturn.reason}`), null);
       return;
     }
 
@@ -54,9 +54,22 @@ const fetchISSFlyOverTimes = (coords, callback) => {
 };
 
 const nextISSTimesForMyLocation = (callback) => {
+  fetchMyIp((error, ip) => {
+    if (error) return callback(error);
+    // callback(null, ip)
 
+    fetchCoordsByIP(ip, (error, coords) => {
+      if (error) return callback(error);
+      //callback(null, coords)
 
-}
+      fetchISSFlyOverTimes(coords, (error, passTimes) => {
+        if (error) return callback(error);
+
+        callback(null, passTimes);
+      })
+    });
+  });
+};
 
 
 
